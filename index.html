@@ -2,7 +2,6 @@
 <html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -12,57 +11,64 @@
 
     <meta
         name="description"
-        content="DinoWorld — uma enciclopédia interativa sobre dinossauros."
+        content="DinoWorld — uma enciclopédia interativa sobre os dinossauros mais fascinantes da pré-história."
     >
 
-    <title>DinoWorld | Enciclopédia Pré-Histórica</title>
+    <meta name="theme-color" content="#07110c">
+
+    <title>DinoWorld — Enciclopédia Pré-Histórica</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap"
+        rel="stylesheet"
+    >
 
     <link
         rel="stylesheet"
-        href="./style.css"
+        href="style.css"
     >
-
 </head>
-
 
 <body>
 
     <!-- =====================================================
-         FUNDO
+         FUNDO TECNOLÓGICO
     ====================================================== -->
 
-    <div class="background-grid"></div>
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
 
-    <div class="glow glow-1"></div>
-    <div class="glow glow-2"></div>
+    <div class="forest-decoration">
+        <span class="leaf leaf-1">🌿</span>
+        <span class="leaf leaf-2">🌿</span>
+        <span class="leaf leaf-3">🌿</span>
+    </div>
 
 
     <!-- =====================================================
-         HEADER
+         CABEÇALHO
     ====================================================== -->
 
-    <header class="header" id="header">
+    <header class="site-header">
 
-        <div class="container nav-container">
+        <div class="header-inner">
 
-            <a
-                href="#inicio"
-                class="logo"
-            >
+            <a href="#inicio" class="brand">
 
-                <div class="logo-icon">
+                <div class="brand-icon">
                     🦖
                 </div>
 
-                <div class="logo-text">
+                <div class="brand-text">
 
-                    <strong>
-                        DINO<span>WORLD</span>
-                    </strong>
+                    <strong>DinoWorld</strong>
 
-                    <small>
+                    <span>
                         PREHISTORIC DATABASE
-                    </small>
+                    </span>
 
                 </div>
 
@@ -70,53 +76,34 @@
 
 
             <button
-                class="mobile-menu"
-                id="mobileMenu"
+                class="mobile-menu-button"
+                id="mobileMenuButton"
                 aria-label="Abrir menu"
             >
                 ☰
             </button>
 
 
-            <nav
-                class="navigation"
-                id="navigation"
-            >
+            <nav class="main-nav" id="mainNav">
 
-                <a
-                    href="#inicio"
-                    class="nav-link active"
-                >
-                    INÍCIO
+                <a href="#inicio" class="nav-link active">
+                    Início
                 </a>
 
-                <a
-                    href="#especies"
-                    class="nav-link"
-                >
-                    DINOSSAUROS
+                <a href="#dinossauros" class="nav-link">
+                    Dinossauros
                 </a>
 
-                <a
-                    href="#eras"
-                    class="nav-link"
-                >
-                    ERAS
+                <a href="#eras" class="nav-link">
+                    Eras
                 </a>
 
-                <a
-                    href="#curiosidades"
-                    class="nav-link"
-                >
-                    CURIOSIDADES
+                <a href="#curiosidades" class="nav-link">
+                    Curiosidades
                 </a>
 
-                <a
-                    href="#dino-ai"
-                    class="nav-link nav-ai"
-                >
-                    <span>✦</span>
-                    DINO AI
+                <a href="#dino-ai" class="nav-link ai-link">
+                    ◆ Dino AI
                 </a>
 
             </nav>
@@ -138,171 +125,102 @@
             id="inicio"
         >
 
-            <div class="hero-lines"></div>
+            <div class="hero-content">
 
-            <div class="container hero-content">
-
-                <div class="hero-copy">
-
-                    <div class="eyebrow">
-
-                        <span class="status-dot"></span>
-
-                        DATABASE ONLINE
-
-                        <span class="eyebrow-line"></span>
-
-                        230 MILHÕES DE ANOS
-
-                    </div>
+                <div class="hero-tag">
+                    230 MILHÕES DE ANOS DE HISTÓRIA
+                </div>
 
 
-                    <h1>
-
-                        O mundo dos
-
-                        <em>dinossauros</em>
-
-                        começa aqui.
-
-                    </h1>
+                <h1>
+                    O mundo dos
+                    <em>dinossauros</em>
+                    começa aqui.
+                </h1>
 
 
-                    <p class="hero-description">
-
-                        Viaje através das eras, conheça as espécies
-                        mais fascinantes que já caminharam pela Terra
-                        e descubra como era a vida muito antes de nós.
-
-                    </p>
+                <p class="hero-description">
+                    Viaje através das eras, conheça as espécies mais
+                    fascinantes que já caminharam pela Terra e descubra
+                    como era a vida muito antes de nós.
+                </p>
 
 
-                    <div class="hero-buttons">
+                <div class="hero-actions">
 
-                        <a
-                            href="#especies"
-                            class="button button-primary"
-                        >
+                    <a
+                        href="#dinossauros"
+                        class="button button-primary"
+                    >
+                        Explorar dinossauros
+                        <span>→</span>
+                    </a>
 
-                            EXPLORAR DINOSSAUROS
+                    <a
+                        href="#eras"
+                        class="button button-secondary"
+                    >
+                        Viajar pelas eras
+                    </a>
 
-                            <span>→</span>
-
-                        </a>
+                </div>
 
 
-                        <a
-                            href="#eras"
-                            class="button button-secondary"
-                        >
+                <div class="hero-stats">
 
-                            VIAJAR PELAS ERAS
+                    <div class="stat">
 
-                        </a>
+                        <strong>10+</strong>
+
+                        <span>ESPÉCIES</span>
 
                     </div>
 
 
-                    <div class="hero-stats">
+                    <div class="stat">
 
-                        <div class="stat">
+                        <strong>3</strong>
 
-                            <strong>
-                                10+
-                            </strong>
+                        <span>GRANDES ERAS</span>
 
-                            <span>
-                                ESPÉCIES
-                            </span>
-
-                        </div>
+                    </div>
 
 
-                        <div class="stat">
+                    <div class="stat">
 
-                            <strong>
-                                3
-                            </strong>
+                        <strong>165M</strong>
 
-                            <span>
-                                GRANDES ERAS
-                            </span>
-
-                        </div>
-
-
-                        <div class="stat">
-
-                            <strong>
-                                165M
-                            </strong>
-
-                            <span>
-                                ANOS
-                            </span>
-
-                        </div>
+                        <span>ANOS</span>
 
                     </div>
 
                 </div>
 
-
-                <!-- DINOSSAURO VISUAL -->
-
-                <div class="hero-dino">
-
-                    <div class="scan-circle"></div>
-
-                    <div class="scan-circle scan-circle-2"></div>
-
-                    <div class="dino-hud top">
-
-                        <span>
-                            SPECIES
-                        </span>
-
-                        <strong>
-                            T-REX
-                        </strong>
-
-                    </div>
+            </div>
 
 
-                    <div
-                        class="hero-dinosaur-art"
-                        id="heroDinosaurArt"
-                    ></div>
+            <div class="hero-visual">
 
+                <div class="hero-orbit orbit-one"></div>
+                <div class="hero-orbit orbit-two"></div>
 
-                    <div class="dino-hud bottom">
+                <div class="hero-dino-image">
 
-                        <div>
+                    <img
+                        src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Tyrannosaurus_rex_Reconstruction_by_Nobu_Tamura.jpg"
+                        alt="Reconstrução de Tyrannosaurus rex"
+                    >
 
-                            <span>
-                                PERIOD
-                            </span>
+                </div>
 
-                            <strong>
-                                CRETÁCEO
-                            </strong>
+                <div class="hero-data data-one">
+                    <span>SPECIES</span>
+                    <strong>T. REX</strong>
+                </div>
 
-                        </div>
-
-                        <div>
-
-                            <span>
-                                STATUS
-                            </span>
-
-                            <strong class="green">
-                                EXTINTO
-                            </strong>
-
-                        </div>
-
-                    </div>
-
+                <div class="hero-data data-two">
+                    <span>STATUS</span>
+                    <strong>EXTINTO</strong>
                 </div>
 
             </div>
@@ -314,7 +232,7 @@
                     ROLE PARA EXPLORAR
                 </span>
 
-                <div class="scroll-line"></div>
+                <div></div>
 
             </div>
 
@@ -323,31 +241,29 @@
 
 
         <!-- =================================================
-             INTRO
+             INTRODUÇÃO
         ================================================== -->
 
-        <section class="intro section">
+        <section
+            class="intro section"
+            id="sobre"
+        >
 
-            <div class="container intro-grid">
+            <div class="section-number">
+                01
+            </div>
 
-                <div class="section-number">
-                    01
-                </div>
-
-
-                <div>
-
-                    <div class="section-label">
-                        BEM-VINDO AO PASSADO
-                    </div>
+            <div class="section-label">
+                BEM-VINDO AO PASSADO
+            </div>
 
 
-                    <h2>
-                        Um planeta que não se parecia
-                        <em>com o nosso.</em>
-                    </h2>
+            <div class="intro-grid">
 
-                </div>
+                <h2>
+                    Um planeta que não se parecia
+                    <em>com o nosso.</em>
+                </h2>
 
 
                 <div class="intro-text">
@@ -365,9 +281,8 @@
                         desenvolveram defesas impressionantes.
                     </p>
 
-
                     <a
-                        href="#especies"
+                        href="#dinossauros"
                         class="text-link"
                     >
                         CONHEÇA AS ESPÉCIES
@@ -383,98 +298,129 @@
 
 
         <!-- =================================================
-             ESPÉCIES
+             DINOSSAUROS
         ================================================== -->
 
         <section
-            class="species section"
-            id="especies"
+            class="dinosaurs section"
+            id="dinossauros"
         >
 
-            <div class="container">
+            <div class="section-heading">
 
-                <div class="section-heading">
+                <div>
 
-                    <div>
-
-                        <div class="section-label">
-                            02 — ESPÉCIES
-                        </div>
-
-                        <h2>
-                            Os gigantes
-                            <em>mais famosos.</em>
-                        </h2>
-
+                    <div class="section-number">
+                        02
                     </div>
 
+                    <div class="section-label">
+                        ESPÉCIES
+                    </div>
+
+                </div>
+
+
+                <div>
+
+                    <h2>
+                        Os gigantes
+                        <em>mais famosos</em>
+                    </h2>
 
                     <p>
-                        Explore algumas das criaturas mais
-                        fascinantes da pré-história.
+                        Explore algumas das criaturas mais fascinantes
+                        da pré-história.
                     </p>
 
                 </div>
 
-
-                <!-- PESQUISA -->
-
-                <div class="search-area">
-
-                    <div class="search-box">
-
-                        <span class="search-icon">
-                            ⌕
-                        </span>
-
-                        <input
-                            type="search"
-                            id="searchInput"
-                            placeholder="Pesquisar por um dinossauro..."
-                            autocomplete="off"
-                        >
-
-                        <kbd>
-                            CTRL K
-                        </kbd>
-
-                    </div>
+            </div>
 
 
-                    <div class="filters">
+            <!-- PESQUISA -->
 
-                        <button
-                            class="filter active"
-                            data-filter="all"
-                        >
-                            TODOS
-                        </button>
+            <div class="search-area">
 
-                        <button
-                            class="filter"
-                            data-filter="carnivoro"
-                        >
-                            CARNÍVOROS
-                        </button>
+                <div class="search-box">
 
-                        <button
-                            class="filter"
-                            data-filter="herbivoro"
-                        >
-                            HERBÍVOROS
-                        </button>
+                    <span class="search-icon">
+                        ⌕
+                    </span>
 
-                    </div>
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Pesquise por um dinossauro..."
+                        autocomplete="off"
+                    >
+
+                    <kbd>
+                        /
+                    </kbd>
 
                 </div>
 
 
-                <!-- CARDS -->
+                <div class="filter-buttons">
 
-                <div
-                    class="dinosaur-grid"
-                    id="dinosaurGrid"
-                ></div>
+                    <button
+                        class="filter-button active"
+                        data-filter="todos"
+                    >
+                        Todos
+                    </button>
+
+                    <button
+                        class="filter-button"
+                        data-filter="carnivoro"
+                    >
+                        Carnívoros
+                    </button>
+
+                    <button
+                        class="filter-button"
+                        data-filter="herbivoro"
+                    >
+                        Herbívoros
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="search-result"
+                id="searchResult"
+            ></div>
+
+
+            <!-- CARDS -->
+
+            <div
+                class="dinosaur-grid"
+                id="dinosaurGrid"
+            ></div>
+
+
+            <div
+                class="empty-state"
+                id="emptyState"
+                hidden
+            >
+
+                <div>
+                    🦕
+                </div>
+
+                <h3>
+                    Nenhum dinossauro encontrado
+                </h3>
+
+                <p>
+                    Tente pesquisar por outro nome.
+                </p>
 
             </div>
 
@@ -483,7 +429,7 @@
 
 
         <!-- =================================================
-             LINHA DO TEMPO
+             ERAS
         ================================================== -->
 
         <section
@@ -491,113 +437,140 @@
             id="eras"
         >
 
-            <div class="container">
+            <div class="section-heading">
 
-                <div class="section-heading">
+                <div>
 
-                    <div>
+                    <div class="section-number">
+                        03
+                    </div>
 
-                        <div class="section-label">
-                            03 — LINHA DO TEMPO
-                        </div>
-
-                        <h2>
-                            Uma viagem através
-                            <em>do tempo.</em>
-                        </h2>
-
+                    <div class="section-label">
+                        LINHA DO TEMPO
                     </div>
 
                 </div>
 
 
-                <div class="timeline">
+                <div>
 
-                    <article class="era">
+                    <h2>
+                        Uma viagem através
+                        <em>do tempo.</em>
+                    </h2>
 
-                        <div class="era-marker">
-                            01
-                        </div>
-
-                        <div class="era-content">
-
-                            <span>
-                                252 — 201 MILHÕES DE ANOS
-                            </span>
-
-                            <h3>
-                                Triássico
-                            </h3>
-
-                            <p>
-                                Os primeiros dinossauros surgiram
-                                durante um mundo muito diferente
-                                do atual. Eram relativamente
-                                pequenos e conviviam com diversos
-                                outros répteis.
-                            </p>
-
-                        </div>
-
-                    </article>
-
-
-                    <article class="era">
-
-                        <div class="era-marker">
-                            02
-                        </div>
-
-                        <div class="era-content">
-
-                            <span>
-                                201 — 145 MILHÕES DE ANOS
-                            </span>
-
-                            <h3>
-                                Jurássico
-                            </h3>
-
-                            <p>
-                                Gigantes herbívoros dominaram as
-                                paisagens, enquanto grandes
-                                predadores percorriam florestas
-                                e planícies.
-                            </p>
-
-                        </div>
-
-                    </article>
-
-
-                    <article class="era">
-
-                        <div class="era-marker">
-                            03
-                        </div>
-
-                        <div class="era-content">
-
-                            <span>
-                                145 — 66 MILHÕES DE ANOS
-                            </span>
-
-                            <h3>
-                                Cretáceo
-                            </h3>
-
-                            <p>
-                                O último grande capítulo da era
-                                dos dinossauros. Surgiram alguns
-                                dos animais mais conhecidos da
-                                história, incluindo o T. rex.
-                            </p>
-
-                        </div>
-
-                    </article>
+                    <p>
+                        Os dinossauros viveram durante diferentes
+                        períodos geológicos.
+                    </p>
 
                 </div>
+
+            </div>
+
+
+            <div class="timeline">
+
+                <article class="era-card">
+
+                    <div class="era-date">
+                        252 — 201
+                        <span>milhões de anos</span>
+                    </div>
+
+                    <div class="era-dot"></div>
+
+                    <div class="era-content">
+
+                        <span class="era-name">
+                            TRIÁSSICO
+                        </span>
+
+                        <h3>
+                            O começo dos gigantes
+                        </h3>
+
+                        <p>
+                            Os primeiros dinossauros surgiram durante
+                            o Triássico. Eram geralmente pequenos e
+                            relativamente leves.
+                        </p>
+
+                        <span class="era-species">
+                            Exemplo: Coelophysis
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <article class="era-card">
+
+                    <div class="era-date">
+                        201 — 145
+                        <span>milhões de anos</span>
+                    </div>
+
+                    <div class="era-dot"></div>
+
+                    <div class="era-content">
+
+                        <span class="era-name">
+                            JURÁSSICO
+                        </span>
+
+                        <h3>
+                            A era dos gigantes
+                        </h3>
+
+                        <p>
+                            Grandes saurópodes dominaram as paisagens,
+                            enquanto predadores como Allosaurus
+                            caçavam suas presas.
+                        </p>
+
+                        <span class="era-species">
+                            Exemplo: Stegosaurus
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <article class="era-card">
+
+                    <div class="era-date">
+                        145 — 66
+                        <span>milhões de anos</span>
+                    </div>
+
+                    <div class="era-dot"></div>
+
+                    <div class="era-content">
+
+                        <span class="era-name">
+                            CRETÁCEO
+                        </span>
+
+                        <h3>
+                            O último capítulo
+                        </h3>
+
+                        <p>
+                            Tyrannosaurus, Triceratops e muitos outros
+                            grupos prosperaram até a extinção em massa
+                            no final do período.
+                        </p>
+
+                        <span class="era-species">
+                            Exemplo: Tyrannosaurus rex
+                        </span>
+
+                    </div>
+
+                </article>
 
             </div>
 
@@ -610,124 +583,134 @@
         ================================================== -->
 
         <section
-            class="facts section"
+            class="curiosities section"
             id="curiosidades"
         >
 
-            <div class="container">
+            <div class="section-heading">
 
-                <div class="section-heading">
+                <div>
 
-                    <div>
+                    <div class="section-number">
+                        04
+                    </div>
 
-                        <div class="section-label">
-                            04 — CURIOSIDADES
-                        </div>
-
-                        <h2>
-                            Fatos que parecem
-                            <em>ficção.</em>
-                        </h2>
-
+                    <div class="section-label">
+                        VOCÊ SABIA?
                     </div>
 
                 </div>
 
 
-                <div class="facts-grid">
+                <div>
 
-                    <article class="fact-card">
+                    <h2>
+                        Fatos que parecem
+                        <em>ficção.</em>
+                    </h2>
 
-                        <div class="fact-number">
-                            01
-                        </div>
-
-                        <div class="fact-icon">
-                            🪶
-                        </div>
-
-                        <h3>
-                            Muitos tinham penas
-                        </h3>
-
-                        <p>
-                            Fósseis mostram que diversos
-                            dinossauros possuíam penas ou
-                            estruturas semelhantes.
-                        </p>
-
-                    </article>
-
-
-                    <article class="fact-card">
-
-                        <div class="fact-number">
-                            02
-                        </div>
-
-                        <div class="fact-icon">
-                            🥚
-                        </div>
-
-                        <h3>
-                            Eles colocavam ovos
-                        </h3>
-
-                        <p>
-                            O registro fóssil preservou ninhos,
-                            ovos e até embriões de algumas
-                            espécies.
-                        </p>
-
-                    </article>
-
-
-                    <article class="fact-card">
-
-                        <div class="fact-number">
-                            03
-                        </div>
-
-                        <div class="fact-icon">
-                            🐦
-                        </div>
-
-                        <h3>
-                            As aves são dinossauros
-                        </h3>
-
-                        <p>
-                            As aves modernas descendem de
-                            dinossauros terópodes e são
-                            consideradas dinossauros vivos.
-                        </p>
-
-                    </article>
-
-
-                    <article class="fact-card">
-
-                        <div class="fact-number">
-                            04
-                        </div>
-
-                        <div class="fact-icon">
-                            ☄️
-                        </div>
-
-                        <h3>
-                            Um asteroide mudou tudo
-                        </h3>
-
-                        <p>
-                            Há cerca de 66 milhões de anos,
-                            um enorme impacto contribuiu para
-                            a extinção dos dinossauros não avianos.
-                        </p>
-
-                    </article>
+                    <p>
+                        Algumas descobertas científicas são tão
+                        surpreendentes quanto os próprios dinossauros.
+                    </p>
 
                 </div>
+
+            </div>
+
+
+            <div class="curiosity-grid">
+
+                <article class="curiosity-card">
+
+                    <span class="curiosity-number">
+                        01
+                    </span>
+
+                    <div class="curiosity-icon">
+                        🦴
+                    </div>
+
+                    <h3>
+                        Ossos gigantes
+                    </h3>
+
+                    <p>
+                        Alguns saurópodes possuíam ossos com
+                        estruturas internas semelhantes a
+                        colmeias, tornando-os mais leves.
+                    </p>
+
+                </article>
+
+
+                <article class="curiosity-card">
+
+                    <span class="curiosity-number">
+                        02
+                    </span>
+
+                    <div class="curiosity-icon">
+                        🪶
+                    </div>
+
+                    <h3>
+                        Dinossauros com penas
+                    </h3>
+
+                    <p>
+                        Evidências fósseis mostram que diversas
+                        espécies de dinossauros terópodes possuíam
+                        penas ou estruturas semelhantes.
+                    </p>
+
+                </article>
+
+
+                <article class="curiosity-card">
+
+                    <span class="curiosity-number">
+                        03
+                    </span>
+
+                    <div class="curiosity-icon">
+                        🌎
+                    </div>
+
+                    <h3>
+                        Eles viveram em todos os continentes
+                    </h3>
+
+                    <p>
+                        Fósseis de dinossauros já foram encontrados
+                        em todos os continentes atuais, inclusive
+                        na Antártida.
+                    </p>
+
+                </article>
+
+
+                <article class="curiosity-card">
+
+                    <span class="curiosity-number">
+                        04
+                    </span>
+
+                    <div class="curiosity-icon">
+                        ☄️
+                    </div>
+
+                    <h3>
+                        O fim de uma era
+                    </h3>
+
+                    <p>
+                        Um grande impacto de asteroide está associado
+                        à extinção dos dinossauros não avianos há
+                        aproximadamente 66 milhões de anos.
+                    </p>
+
+                </article>
 
             </div>
 
@@ -744,38 +727,40 @@
             id="dino-ai"
         >
 
-            <div class="container">
+            <div class="ai-panel">
 
-                <div class="ai-panel">
+                <div class="ai-intro">
 
-                    <div class="ai-header">
+                    <div class="ai-badge">
+                        ◆ DINO AI
+                    </div>
 
-                        <div class="ai-title">
+                    <h2>
+                        Pergunte ao
+                        <em>passado.</em>
+                    </h2>
 
-                            <div class="ai-icon">
-                                ✦
-                            </div>
+                    <p>
+                        Escolha um dinossauro e converse com o
+                        assistente da DinoWorld para descobrir
+                        informações sobre ele.
+                    </p>
 
-                            <div>
+                </div>
 
-                                <div class="section-label">
-                                    INTELLIGENCE SYSTEM
-                                </div>
 
-                                <h2>
-                                    Dino <em>AI</em>
-                                </h2>
+                <div class="ai-chat">
 
-                            </div>
-
-                        </div>
-
+                    <div class="ai-chat-header">
 
                         <div class="ai-status">
 
-                            <span></span>
+                            <span class="status-dot"></span>
 
-                            ONLINE
+                            Dino AI
+                            <small>
+                                ONLINE
+                            </small>
 
                         </div>
 
@@ -783,27 +768,28 @@
 
 
                     <div
-                        class="chat-window"
-                        id="chatWindow"
+                        class="chat-messages"
+                        id="chatMessages"
                     >
 
-                        <div class="message ai">
+                        <div class="chat-message ai-message">
 
                             <div class="message-avatar">
-                                🦖
+                                ◆
                             </div>
 
                             <div class="message-content">
 
-                                <span>
+                                <span class="message-name">
                                     DINO AI
                                 </span>
 
                                 <p>
                                     Olá! Eu sou o Dino AI.
-                                    Pergunte alguma coisa sobre
-                                    os dinossauros disponíveis
-                                    nesta enciclopédia.
+                                    Pergunte sobre T. rex,
+                                    Spinosaurus, Velociraptor,
+                                    Triceratops ou qualquer outro
+                                    dinossauro da nossa base.
                                 </p>
 
                             </div>
@@ -813,42 +799,34 @@
                     </div>
 
 
-                    <div class="suggestions">
+                    <div class="quick-questions">
 
-                        <button
-                            class="suggestion"
-                            data-question="Qual era o tamanho do T. rex?"
-                        >
-                            Tamanho do T. rex?
+                        <button data-question="Qual era o tamanho do T. rex?">
+                            Tamanho do T. rex
                         </button>
 
-                        <button
-                            class="suggestion"
-                            data-question="O Velociraptor tinha penas?"
-                        >
+                        <button data-question="O Velociraptor tinha penas?">
                             Velociraptor tinha penas?
                         </button>
 
-                        <button
-                            class="suggestion"
-                            data-question="O que o Triceratops comia?"
-                        >
-                            O que o Triceratops comia?
+                        <button data-question="O que o Triceratops comia?">
+                            Dieta do Triceratops
                         </button>
 
                     </div>
 
 
                     <form
-                        class="ai-form"
-                        id="aiForm"
+                        class="chat-form"
+                        id="chatForm"
                     >
 
                         <input
                             type="text"
-                            id="aiInput"
-                            placeholder="Pergunte sobre um dinossauro..."
+                            id="chatInput"
+                            placeholder="Faça uma pergunta..."
                             autocomplete="off"
+                            required
                         >
 
                         <button
@@ -871,103 +849,64 @@
 
 
     <!-- =====================================================
-         FOOTER
-    ====================================================== -->
-
-    <footer class="footer">
-
-        <div class="container footer-grid">
-
-            <div class="footer-brand">
-
-                <div class="logo">
-
-                    <div class="logo-icon">
-                        🦖
-                    </div>
-
-                    <div class="logo-text">
-
-                        <strong>
-                            DINO<span>WORLD</span>
-                        </strong>
-
-                        <small>
-                            PREHISTORIC DATABASE
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-                <p>
-                    Uma viagem interativa pela história
-                    dos dinossauros.
-                </p>
-
-            </div>
-
-
-            <div class="footer-links">
-
-                <a href="#inicio">
-                    INÍCIO
-                </a>
-
-                <a href="#especies">
-                    ESPÉCIES
-                </a>
-
-                <a href="#eras">
-                    ERAS
-                </a>
-
-                <a href="#dino-ai">
-                    DINO AI
-                </a>
-
-            </div>
-
-
-            <div class="footer-copy">
-
-                <span>
-                    © 2026 DINOWORLD
-                </span>
-
-                <span>
-                    BUILT FOR THE CURIOUS
-                </span>
-
-            </div>
-
-        </div>
-
-    </footer>
-
-
-
-    <!-- =====================================================
-         MODAL
+         MODAL DOS DINOSSAUROS
     ====================================================== -->
 
     <div
         class="modal"
-        id="dinoModal"
+        id="dinosaurModal"
+        aria-hidden="true"
     >
+
+        <div
+            class="modal-overlay"
+            id="modalOverlay"
+        ></div>
+
 
         <div class="modal-box">
 
             <button
                 class="modal-close"
-                id="closeModal"
+                id="modalClose"
                 aria-label="Fechar"
             >
                 ×
             </button>
 
-            <div id="modalBody"></div>
+
+            <div
+                class="modal-image"
+                id="modalImage"
+            ></div>
+
+
+            <div class="modal-content">
+
+                <span
+                    class="modal-period"
+                    id="modalPeriod"
+                ></span>
+
+                <h2 id="modalName"></h2>
+
+                <p
+                    class="modal-scientific"
+                    id="modalScientific"
+                ></p>
+
+                <p
+                    class="modal-description"
+                    id="modalDescription"
+                ></p>
+
+
+                <div
+                    class="modal-facts"
+                    id="modalFacts"
+                ></div>
+
+            </div>
 
         </div>
 
@@ -976,11 +915,39 @@
 
 
     <!-- =====================================================
-         JAVASCRIPT
+         RODAPÉ
     ====================================================== -->
 
+    <footer class="site-footer">
+
+        <div class="footer-brand">
+
+            <strong>
+                🦖 DinoWorld
+            </strong>
+
+            <span>
+                PREHISTORIC DATABASE
+            </span>
+
+        </div>
+
+
+        <p>
+            Uma experiência educativa sobre a vida pré-histórica.
+        </p>
+
+
+        <span class="footer-line">
+            © 2026 DinoWorld
+        </span>
+
+    </footer>
+
+
+
     <script
-        src="./script.js"
+        src="script.js"
         defer
     ></script>
 
