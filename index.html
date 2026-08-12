@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DinoTech - Enciclopédia Pré-Histórica</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">DINO<span>TECH</span></div>
+    <ul class="nav-links">
+      <li class="tab-btn active" onclick="switchTab(event, 'explore')">Explorar</li>
+      <li class="tab-btn" onclick="switchTab(event, 'ai-chat')">DinoIA</li>
+    </ul>
+  </nav>
+
+  <main id="explore" class="tab-content active">
+    <header class="hero">
+      <h1>Base de Dados Mesozoica</h1>
+      <div class="search-box">
+        <input type="text" id="searchInput" onkeyup="filterDinos()" placeholder="Pesquisar por nome ou dieta...">
+      </div>
+    </header>
+
+    <section class="dino-grid" id="dinoGrid">
+      <div class="dino-card">
+        <span class="tech-tag">Carnívoro</span>
+        <h3>Tyrannosaurus Rex</h3>
+        <p><strong>Era:</strong> Cretáceo Superior</p>
+        <p>Predador de topo com uma das mordidas mais fortes da história terrestre.</p>
+      </div>
+      <div class="dino-card">
+        <span class="tech-tag herbivore">Herbívoro</span>
+        <h3>Triceratops</h3>
+        <p><strong>Era:</strong> Cretáceo Superior</p>
+        <p>Possuía um grande escudo ósseo e três chifres para se defender de predadores.</p>
+      </div>
+      <div class="dino-card">
+        <span class="tech-tag">Carnívoro</span>
+        <h3>Velociraptor</h3>
+        <p><strong>Era:</strong> Cretáceo Superior</p>
+        <p>Pequeno, extremamente ágil e dotado de uma garra em forma de foice nas patas.</p>
+      </div>
+      <div class="dino-card">
+        <span class="tech-tag herbivore">Herbívoro</span>
+        <h3>Brachiosaurus</h3>
+        <p><strong>Era:</strong> Jurássico Superior</p>
+        <p>Garganta elevada que permitia alcançar as folhas mais altas das florestas primitivas.</p>
+      </div>
+    </section>
+  </main>
+
+  <main id="ai-chat" class="tab-content">
+    <div class="chat-container">
+      <h2>DinoIA - Assistente Paleontológico</h2>
+      <div class="chat-box" id="chatBox">
+        <div class="msg ai">Olá! Sou a DinoIA. Pergunte-me sobre o T-Rex, Triceratops, Velociraptor ou Brachiosaurus!</div>
+      </div>
+      <div class="chat-input-area">
+        <input type="text" id="userInput" placeholder="Ex: Qual o tamanho do T-Rex?">
+        <button onclick="sendMessage()">Consultar</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
