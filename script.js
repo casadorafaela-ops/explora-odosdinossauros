@@ -1,46 +1,162 @@
-function switchTab(event, tabId) {
-  document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-  
-  document.getElementById(tabId).classList.add('active');
-  event.currentTarget.classList.add('active');
-}
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import OpenAI from "openai";
+import path from "path";
+import { fileURLToPath } from "url";
 
-function filterDinos() {
-  const input = document.getElementById('searchInput').value.toLowerCase();
-  const cards = document.querySelectorAll('.dino-card');
 
-  cards.forEach(card => {
-    const text = card.textContent.toLowerCase();
-    card.style.display = text.includes(input) ? 'block' : 'none';
-  });
-}
+dotenv.config();
 
-function sendMessage() {
-  const input = document.getElementById('userInput');
-  const chatBox = document.getElementById('chatBox');
-  const text = input.value.trim();
 
-  if (!text) return;
+const app = express();
 
-  chatBox.innerHTML += `<div class="msg user">${text}</div>`;
-  input.value = '';
+const PORT = process.env.PORT || 3000;
 
-  setTimeout(() => {
-    let reply = "Informação não encontrada no banco de dados. Tente perguntar sobre T-Rex, Triceratops, Velociraptor ou Brachiosaurus!";
-    const lower = text.toLowerCase();
-    
-    if (lower.includes('t-rex') || lower.includes('tyrannosaurus')) {
-      reply = "O Tyrannosaurus Rex media cerca de 12 metros de comprimento e pesava até 8 toneladas.";
-    } else if (lower.includes('triceratops')) {
-      reply = "O Triceratops viveu no final do Cretáceo e usava seus chifres principalmente para defesa contra predadores.";
-    } else if (lower.includes('velociraptor')) {
-      reply = "O Velociraptor era um caçador bípede, rápido, com cerca de 2 metros de comprimento.";
-    } else if (lower.includes('brachiosaurus')) {
-      reply = "O Brachiosaurus podia atingir até 13 metros de altura, equivalente a um prédio de 4 andares.";
+
+const __filename =
+    fileURLToPath(import.meta.url);
+
+const __dirname =
+    path.dirname(__filename);
+
+
+/* ==============================
+   OPENAI
+============================== */
+
+const client = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY
+});
+
+
+/* ==============================
+   MIDDLEWARE
+============================== */
+
+app.use(cors());
+
+app.use(express.json());
+
+
+/* ==============================
+   SITE
+============================== */
+
+app.use(
+    express.static(
+        path.join(__dirname, "..")
+    )
+);
+
+
+/* ==============================
+   IA
+============================== */
+
+app.post("/api/ask", async (req, res) => {
+
+    try {
+
+        const {
+            dinosaur,
+            question
+        } = req.body;
+
+
+        if (!dinosaur || !question) {
+
+            return res.status(400).json({
+
+                error:
+                    "Dinossauro e pergunta são obrigatórios."
+
+            });
+
+        }
+
+
+        const prompt = `
+
+Você é o DINO AI, um assistente educacional
+especializado em paleontologia.
+
+O usuário escolheu:
+
+DINOSSAURO:
+${dinosaur}
+
+PERGUNTA:
+${question}
+
+REGRAS:
+
+1. Responda em português brasileiro.
+2. Explique de maneira clara e interessante.
+3. Use linguagem adequada para estudantes.
+4. Não invente fatos.
+5. Quando houver incerteza científica,
+   deixe isso claro.
+6. Diferencie evidências científicas de
+   especulações.
+7. Priorize informações paleontológicas.
+8. Não precisa repetir o nome do dinossauro
+   em todas as frases.
+9. Responda em no máximo 3 parágrafos.
+10. Se a pergunta não estiver relacionada
+    ao dinossauro ou paleontologia, explique
+    educadamente que você foi criado para
+    responder dúvidas sobre o tema.
+
+`;
+
+
+        const response =
+            await client.responses.create({
+
+                model: "gpt-5",
+
+                input: prompt
+
+            });
+
+
+        const answer =
+            response.output_text;
+
+
+        res.json({
+
+            answer
+
+        });
+
     }
 
-    chatBox.innerHTML += `<div class="msg ai">${reply}</div>`;
-    chatBox.scrollTop = chatBox.scrollHeight;
-  }, 400);
-}
+    catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+
+            error:
+                "Erro ao consultar a inteligência artificial."
+
+        });
+
+    }
+
+});
+
+
+/* ==============================
+   SERVER
+============================== */
+
+app.listen(PORT, () => {
+
+    console.log(
+        `DinoVerse rodando em http://localhost:${PORT}`
+    );
+
+});
