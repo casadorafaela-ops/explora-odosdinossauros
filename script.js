@@ -1,162 +1,103 @@
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import OpenAI from "openai";
-import path from "path";
-import { fileURLToPath } from "url";
+function renderDinosaurs(list = dinosaurs) {
+
+    const grid = document.getElementById("dinosaurGrid");
+
+    grid.innerHTML = "";
+
+    list.forEach((dino, index) => {
+
+        const card = document.createElement("article");
+
+        card.className = "dino-card";
+
+        card.style.animationDelay =
+            `${index * 70}ms`;
 
 
-dotenv.config();
+        card.innerHTML = `
+
+            <div class="dino-card-header">
+
+                <span>
+                    SPECIMEN ${String(index + 1).padStart(3, "0")}
+                </span>
+
+                <b>
+                    ● VERIFIED
+                </b>
+
+            </div>
 
 
-const app = express();
+            <div class="dino-image">
 
-const PORT = process.env.PORT || 3000;
+                <img
+                    src="${dino.image}"
+                    alt="${dino.name}"
+                    loading="lazy"
+                >
 
+                <div class="dino-scan"></div>
 
-const __filename =
-    fileURLToPath(import.meta.url);
+                <div class="dino-grid"></div>
 
-const __dirname =
-    path.dirname(__filename);
-
-
-/* ==============================
-   OPENAI
-============================== */
-
-const client = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
-});
+            </div>
 
 
-/* ==============================
-   MIDDLEWARE
-============================== */
+            <div class="dino-card-body">
 
-app.use(cors());
+                <span class="dino-type">
+                    ${dino.classification}
+                </span>
 
-app.use(express.json());
+                <h3>
+                    ${dino.shortName}
+                </h3>
 
-
-/* ==============================
-   SITE
-============================== */
-
-app.use(
-    express.static(
-        path.join(__dirname, "..")
-    )
-);
+                <p>
+                    ${dino.name}
+                </p>
 
 
-/* ==============================
-   IA
-============================== */
+                <div class="dino-data">
 
-app.post("/api/ask", async (req, res) => {
+                    <div>
+                        <small>PERIOD</small>
+                        <strong>
+                            ${dino.period}
+                        </strong>
+                    </div>
 
-    try {
+                    <div>
+                        <small>LENGTH</small>
+                        <strong>
+                            ${dino.length}
+                        </strong>
+                    </div>
 
-        const {
-            dinosaur,
-            question
-        } = req.body;
-
-
-        if (!dinosaur || !question) {
-
-            return res.status(400).json({
-
-                error:
-                    "Dinossauro e pergunta são obrigatórios."
-
-            });
-
-        }
+                </div>
 
 
-        const prompt = `
+                <button class="access-data">
 
-Você é o DINO AI, um assistente educacional
-especializado em paleontologia.
+                    ACCESS SPECIMEN
 
-O usuário escolheu:
+                    <span>→</span>
 
-DINOSSAURO:
-${dinosaur}
+                </button>
 
-PERGUNTA:
-${question}
+            </div>
 
-REGRAS:
-
-1. Responda em português brasileiro.
-2. Explique de maneira clara e interessante.
-3. Use linguagem adequada para estudantes.
-4. Não invente fatos.
-5. Quando houver incerteza científica,
-   deixe isso claro.
-6. Diferencie evidências científicas de
-   especulações.
-7. Priorize informações paleontológicas.
-8. Não precisa repetir o nome do dinossauro
-   em todas as frases.
-9. Responda em no máximo 3 parágrafos.
-10. Se a pergunta não estiver relacionada
-    ao dinossauro ou paleontologia, explique
-    educadamente que você foi criado para
-    responder dúvidas sobre o tema.
-
-`;
+        `;
 
 
-        const response =
-            await client.responses.create({
-
-                model: "gpt-5",
-
-                input: prompt
-
-            });
+        card.addEventListener(
+            "click",
+            () => openDinosaurModal(dino)
+        );
 
 
-        const answer =
-            response.output_text;
+        grid.appendChild(card);
 
-
-        res.json({
-
-            answer
-
-        });
-
-    }
-
-    catch (error) {
-
-        console.error(error);
-
-        res.status(500).json({
-
-            error:
-                "Erro ao consultar a inteligência artificial."
-
-        });
-
-    }
-
-});
-
-
-/* ==============================
-   SERVER
-============================== */
-
-app.listen(PORT, () => {
-
-    console.log(
-        `DinoVerse rodando em http://localhost:${PORT}`
-    );
-
-});
+    });
+}
