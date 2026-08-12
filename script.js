@@ -1,575 +1,387 @@
 /* =========================================================
-   DINOWORLD — JAVASCRIPT
+   DINOWORLD
+   ESTILO PRINCIPAL
 ========================================================= */
+
+:root {
+    --bg: #07110c;
+    --bg-light: #0b1810;
+    --bg-card: #0b1911;
+
+    --green: #b7cf52;
+    --green-light: #d5e77c;
+    --green-dark: #405c24;
+
+    --text: #f0eee1;
+    --text-soft: #cbd1c4;
+    --text-muted: #899486;
+
+    --border: rgba(160, 185, 100, 0.18);
+
+    --brown: #6d5536;
+
+    --serif: "Playfair Display", Georgia, serif;
+    --sans: "DM Sans", Arial, sans-serif;
+
+    --max-width: 1010px;
+}
 
 
 /* =========================================================
-   BANCO DE DINOSSAUROS
+   RESET
 ========================================================= */
 
-const dinosaurs = [
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    {
-        id: "trex",
-        name: "Tyrannosaurus rex",
-        shortName: "T. rex",
-        period: "Cretáceo",
-        type: "carnivoro",
-        typeLabel: "Carnívoro",
-        location: "América do Norte",
-        length: "11–13 metros",
-        weight: "5–9 toneladas",
-        diet: "Carnívoro",
-        years: "68–66 milhões de anos",
-        color: "#9ebc56",
+html {
+    scroll-behavior: smooth;
+}
 
-        description:
-            "Um dos maiores predadores terrestres conhecidos. Possuía uma cabeça enorme, dentes robustos e uma mordida extremamente poderosa.",
+body {
+    min-height: 100vh;
 
-        curiosity:
-            "O T. rex possuía braços muito pequenos em relação ao corpo, mas tinha pernas extremamente fortes e uma cauda pesada."
-    },
+    background:
+        radial-gradient(
+            circle at 80% 10%,
+            rgba(80, 120, 50, 0.15),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 10% 70%,
+            rgba(65, 95, 42, 0.10),
+            transparent 30%
+        ),
+        #07110c;
 
+    color: var(--text);
 
-    {
-        id: "spinosaurus",
-        name: "Spinosaurus",
-        shortName: "Spinosaurus",
-        period: "Cretáceo",
-        type: "carnivoro",
-        typeLabel: "Carnívoro",
-        location: "Norte da África",
-        length: "14–18 metros",
-        weight: "Várias toneladas",
-        diet: "Principalmente peixes",
-        years: "100–94 milhões de anos",
-        color: "#7f9e4b",
+    font-family: var(--sans);
 
-        description:
-            "Um enorme predador conhecido pela vela nas costas e pelo focinho alongado. Apresentava várias adaptações associadas a ambientes aquáticos.",
-
-        curiosity:
-            "Seus dentes cônicos e mandíbula alongada eram adequados para capturar peixes."
-    },
+    overflow-x: hidden;
+}
 
 
-    {
-        id: "velociraptor",
-        name: "Velociraptor",
-        shortName: "Velociraptor",
-        period: "Cretáceo",
-        type: "carnivoro",
-        typeLabel: "Carnívoro",
-        location: "Ásia",
-        length: "Cerca de 2 metros",
-        weight: "Aproximadamente 15 kg",
-        diet: "Carnívoro",
-        years: "75–71 milhões de anos",
-        color: "#a8b66a",
+/* grid tecnológico */
 
-        description:
-            "Um pequeno terópode predador conhecido pela grande garra curva localizada no segundo dedo de cada pé.",
+body::before {
+    content: "";
 
-        curiosity:
-            "O Velociraptor real possuía penas e era muito menor do que sua representação em muitos filmes."
-    },
+    position: fixed;
 
+    inset: 0;
 
-    {
-        id: "triceratops",
-        name: "Triceratops",
-        shortName: "Triceratops",
-        period: "Cretáceo",
-        type: "herbivoro",
-        typeLabel: "Herbívoro",
-        location: "América do Norte",
-        length: "8–9 metros",
-        weight: "6–12 toneladas",
-        diet: "Herbívoro",
-        years: "68–66 milhões de anos",
-        color: "#899c55",
+    pointer-events: none;
 
-        description:
-            "Grande herbívoro reconhecido pelos três chifres e pelo enorme escudo ósseo localizado atrás da cabeça.",
+    opacity: 0.32;
 
-        curiosity:
-            "Os chifres provavelmente tinham funções relacionadas à defesa, disputas e comunicação visual."
-    },
+    background-image:
+        linear-gradient(
+            rgba(130, 160, 90, 0.08) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(130, 160, 90, 0.08) 1px,
+            transparent 1px
+        );
+
+    background-size: 60px 60px;
+
+    z-index: -2;
+}
 
 
-    {
-        id: "stegosaurus",
-        name: "Stegosaurus",
-        shortName: "Stegosaurus",
-        period: "Jurássico",
-        type: "herbivoro",
-        typeLabel: "Herbívoro",
-        location: "América do Norte",
-        length: "7–9 metros",
-        weight: "3–5 toneladas",
-        diet: "Herbívoro",
-        years: "155–150 milhões de anos",
-        color: "#8da05a",
+/* brilho */
 
-        description:
-            "Herbívoro caracterizado pelas grandes placas ósseas ao longo das costas e pelos espinhos presentes na cauda.",
+.background-glow {
+    position: fixed;
 
-        curiosity:
-            "As placas provavelmente desempenhavam funções relacionadas à exibição e regulação térmica."
-    },
+    width: 450px;
+    height: 450px;
 
+    border-radius: 50%;
 
-    {
-        id: "brachiosaurus",
-        name: "Brachiosaurus",
-        shortName: "Brachiosaurus",
-        period: "Jurássico",
-        type: "herbivoro",
-        typeLabel: "Herbívoro",
-        location: "América do Norte",
-        length: "Até aproximadamente 26 metros",
-        weight: "Dezenas de toneladas",
-        diet: "Herbívoro",
-        years: "Jurássico Superior",
-        color: "#788f4a",
+    filter: blur(100px);
 
-        description:
-            "Um gigantesco saurópode de pescoço extremamente longo. Suas pernas dianteiras eram maiores que as traseiras.",
+    pointer-events: none;
 
-        curiosity:
-            "Sua anatomia permitia alcançar vegetação localizada em alturas muito superiores às alcançadas por vários outros herbívoros."
-    },
+    opacity: 0.08;
 
+    z-index: -3;
+}
 
-    {
-        id: "ankylosaurus",
-        name: "Ankylosaurus",
-        shortName: "Ankylosaurus",
-        period: "Cretáceo",
-        type: "herbivoro",
-        typeLabel: "Herbívoro",
-        location: "América do Norte",
-        length: "6–8 metros",
-        weight: "4–8 toneladas",
-        diet: "Herbívoro",
-        years: "68–66 milhões de anos",
-        color: "#687f42",
+.glow-one {
+    background: #8ba73d;
+    top: 10%;
+    right: -180px;
+}
 
-        description:
-            "Um herbívoro fortemente protegido por placas ósseas. Sua principal arma era uma poderosa clava na extremidade da cauda.",
-
-        curiosity:
-            "A cauda em forma de clava provavelmente era capaz de produzir impactos muito fortes."
-    },
-
-
-    {
-        id: "parasaurolophus",
-        name: "Parasaurolophus",
-        shortName: "Parasaurolophus",
-        period: "Cretáceo",
-        type: "herbivoro",
-        typeLabel: "Herbívoro",
-        location: "América do Norte",
-        length: "9–10 metros",
-        weight: "2–3 toneladas",
-        diet: "Herbívoro",
-        years: "76–73 milhões de anos",
-        color: "#95ad60",
-
-        description:
-            "Um hadrossauro conhecido pela longa crista óssea que se projetava para trás da cabeça.",
-
-        curiosity:
-            "A estrutura da crista provavelmente ajudava na produção e ressonância de sons."
-    },
-
-
-    {
-        id: "allosaurus",
-        name: "Allosaurus",
-        shortName: "Allosaurus",
-        period: "Jurássico",
-        type: "carnivoro",
-        typeLabel: "Carnívoro",
-        location: "América do Norte",
-        length: "8–10 metros",
-        weight: "1,5–2 toneladas",
-        diet: "Carnívoro",
-        years: "155–145 milhões de anos",
-        color: "#72894b",
-
-        description:
-            "Um dos principais predadores do Jurássico Superior, com cabeça grande, dentes serrilhados e três dedos nas mãos.",
-
-        curiosity:
-            "Diferentemente do T. rex, o Allosaurus possuía braços relativamente maiores."
-    },
-
-
-    {
-        id: "dilophosaurus",
-        name: "Dilophosaurus",
-        shortName: "Dilophosaurus",
-        period: "Jurássico",
-        type: "carnivoro",
-        typeLabel: "Carnívoro",
-        location: "América do Norte",
-        length: "Cerca de 7 metros",
-        weight: "Aproximadamente 400 kg",
-        diet: "Carnívoro",
-        years: "193–183 milhões de anos",
-        color: "#91a75b",
-
-        description:
-            "Um predador do início do Jurássico conhecido pelas duas cristas ósseas localizadas sobre a cabeça.",
-
-        curiosity:
-            "A representação cinematográfica do animal cuspindo veneno não possui evidência científica."
-    }
-
-];
+.glow-two {
+    background: #3d7138;
+    bottom: 5%;
+    left: -180px;
+}
 
 
 /* =========================================================
-   ELEMENTOS
+   TIPOGRAFIA
 ========================================================= */
 
-const grid =
-    document.getElementById("dinosaurGrid");
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--serif);
 
-const searchInput =
-    document.getElementById("searchInput");
+    font-weight: 500;
 
-const filters =
-    document.querySelectorAll(".filter");
+    color: var(--text);
+}
 
-const modal =
-    document.getElementById("dinoModal");
+h1 em,
+h2 em {
+    color: #89927e;
 
-const modalBody =
-    document.getElementById("modalBody");
+    font-style: italic;
+}
 
-const closeModalButton =
-    document.getElementById("closeModal");
+p {
+    color: var(--text-soft);
 
-const mobileMenu =
-    document.getElementById("mobileMenu");
+    line-height: 1.75;
+}
 
-const navigation =
-    document.getElementById("navigation");
+a {
+    color: inherit;
 
-const header =
-    document.getElementById("header");
-
-const aiForm =
-    document.getElementById("aiForm");
-
-const aiInput =
-    document.getElementById("aiInput");
-
-const chatWindow =
-    document.getElementById("chatWindow");
-
-const heroArt =
-    document.getElementById("heroDinosaurArt");
-
-
-let currentFilter = "all";
+    text-decoration: none;
+}
 
 
 /* =========================================================
-   DESENHO DOS DINOSSAUROS
+   HEADER
 ========================================================= */
 
-function dinosaurSVG(dino, large = false) {
+.site-header {
+    position: sticky;
 
-    const scale =
-        large ? 1 : .82;
+    top: 0;
 
-    let extra = "";
+    z-index: 100;
 
+    height: 82px;
 
-    if (dino.id === "spinosaurus") {
+    background: rgba(5, 15, 9, 0.88);
 
-        extra = `
-            <path
-                d="M135 205 L180 70 L205 185 L235 65 L260 190"
-                fill="${dino.color}"
-                opacity=".75"
-            />
-        `;
+    border-bottom: 1px solid var(--border);
 
-    }
+    backdrop-filter: blur(18px);
+}
 
+.header-inner {
+    max-width: var(--max-width);
 
-    if (dino.id === "stegosaurus") {
+    height: 100%;
 
-        extra = `
+    margin: auto;
 
-            <g fill="${dino.color}" opacity=".9">
+    padding: 0 22px;
 
-                <path d="M180 145 L195 80 L215 150 Z"/>
-                <path d="M220 135 L240 65 L258 145 Z"/>
-                <path d="M260 130 L285 75 L300 145 Z"/>
-                <path d="M300 135 L325 90 L338 150 Z"/>
+    display: flex;
 
-            </g>
+    align-items: center;
 
-        `;
+    justify-content: space-between;
+}
 
-    }
 
+/* marca */
 
-    if (dino.id === "triceratops") {
+.brand {
+    display: flex;
 
-        extra = `
+    align-items: center;
 
-            <path
-                d="M300 140 L350 80 L330 150"
-                fill="none"
-                stroke="${dino.color}"
-                stroke-width="14"
-                stroke-linecap="round"
-            />
+    gap: 12px;
+}
 
-            <path
-                d="M275 145 L290 85 L300 150"
-                fill="none"
-                stroke="${dino.color}"
-                stroke-width="12"
-                stroke-linecap="round"
-            />
+.brand-icon {
+    width: 40px;
+    height: 40px;
 
-        `;
+    display: grid;
 
-    }
+    place-items: center;
 
+    border: 1px solid rgba(183, 207, 82, 0.28);
 
-    if (dino.id === "ankylosaurus") {
+    background: rgba(100, 130, 45, 0.10);
 
-        extra = `
+    color: var(--green);
 
-            <circle
-                cx="105"
-                cy="220"
-                r="32"
-                fill="${dino.color}"
-            />
+    font-size: 19px;
+}
 
-            <circle
-                cx="85"
-                cy="215"
-                r="12"
-                fill="#506737"
-            />
+.brand-text {
+    display: flex;
 
-        `;
+    flex-direction: column;
 
-    }
+    gap: 3px;
+}
 
+.brand-text strong {
+    color: var(--text);
 
-    if (dino.id === "parasaurolophus") {
+    font-size: 14px;
 
-        extra = `
+    letter-spacing: 1.5px;
 
-            <path
-                d="M295 140 Q365 70 350 130"
-                fill="none"
-                stroke="${dino.color}"
-                stroke-width="28"
-                stroke-linecap="round"
-            />
+    text-transform: uppercase;
+}
 
-        `;
+.brand-text span {
+    color: #657060;
 
-    }
+    font-size: 7px;
 
+    letter-spacing: 2.3px;
+}
 
-    return `
 
-        <svg
-            viewBox="0 0 500 320"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-label="${dino.name}"
-        >
+/* navegação */
 
-            <defs>
+.main-nav {
+    display: flex;
 
-                <linearGradient
-                    id="body-${dino.id}"
-                    x1="0"
-                    y1="0"
-                    x2="1"
-                    y2="1"
-                >
+    align-items: center;
 
-                    <stop
-                        offset="0"
-                        stop-color="${dino.color}"
-                    />
+    gap: 27px;
+}
 
-                    <stop
-                        offset="1"
-                        stop-color="#354b29"
-                    />
+.nav-link {
+    position: relative;
 
-                </linearGradient>
+    color: #909a8c;
 
-            </defs>
+    font-size: 9px;
 
+    font-weight: 600;
 
-            <!-- cauda -->
+    letter-spacing: 1.6px;
 
-            <path
-                d="M150 185
-                   Q75 145 30 180
-                   Q75 195 150 205"
-                fill="url(#body-${dino.id})"
-            />
+    text-transform: uppercase;
 
+    transition: color 0.25s ease;
+}
 
-            <!-- corpo -->
+.nav-link:hover,
+.nav-link.active {
+    color: var(--text);
+}
 
-            <ellipse
-                cx="225"
-                cy="175"
-                rx="105"
-                ry="58"
-                fill="url(#body-${dino.id})"
-            />
+.nav-link.active::after {
+    content: "";
 
+    position: absolute;
 
-            <!-- pescoço -->
+    left: 0;
+    right: 0;
 
-            <path
-                d="M270 160
-                   Q275 120 310 110
-                   L330 145
-                   Q305 155 300 185"
-                fill="${dino.color}"
-            />
+    bottom: -13px;
 
+    height: 1px;
 
-            <!-- cabeça -->
+    background: var(--green);
+}
 
-            <ellipse
-                cx="340"
-                cy="110"
-                rx="55"
-                ry="38"
-                fill="url(#body-${dino.id})"
-            />
+.ai-link {
+    color: var(--green);
+}
 
 
-            <!-- focinho -->
+/* menu mobile */
 
-            <path
-                d="M370 120
-                   Q430 112 450 130
-                   Q420 150 365 143"
-                fill="${dino.color}"
-            />
+.mobile-menu-button {
+    display: none;
 
+    border: 1px solid var(--border);
 
-            <!-- boca -->
+    background: transparent;
 
-            <path
-                d="M370 137 Q410 145 445 132"
-                fill="none"
-                stroke="#1c2818"
-                stroke-width="4"
-            />
+    color: var(--text);
 
+    width: 42px;
+    height: 42px;
 
-            <!-- olho -->
+    cursor: pointer;
 
-            <circle
-                cx="352"
-                cy="102"
-                r="6"
-                fill="#e9edcf"
-            />
+    font-size: 18px;
+}
 
-            <circle
-                cx="354"
-                cy="102"
-                r="3"
-                fill="#111"
-            />
 
+/* =========================================================
+   ESTRUTURA
+========================================================= */
 
-            <!-- perna traseira -->
+.section {
+    max-width: var(--max-width);
 
-            <path
-                d="M275 205
-                   L285 275
-                   L310 275
-                   L315 200"
-                fill="${dino.color}"
-            />
+    margin: 0 auto;
 
+    padding: 120px 22px;
+}
 
-            <!-- perna dianteira -->
+.section-number {
+    color: #65715d;
 
-            <path
-                d="M200 205
-                   L190 275
-                   L215 275
-                   L235 205"
-                fill="${dino.color}"
-            />
+    font-size: 8px;
 
+    letter-spacing: 4px;
 
-            <!-- braço -->
+    margin-bottom: 8px;
+}
 
-            <path
-                d="M285 160
-                   L315 205
-                   L325 202"
-                fill="none"
-                stroke="${dino.color}"
-                stroke-width="13"
-                stroke-linecap="round"
-            />
+.section-label {
+    color: var(--green);
 
+    font-size: 8px;
 
-            <!-- garras -->
+    font-weight: 700;
 
-            <path
-                d="M190 275 L180 282
-                   M205 275 L200 284
-                   M285 275 L280 283"
-                stroke="#b9c77c"
-                stroke-width="4"
-                stroke-linecap="round"
-            />
+    letter-spacing: 2.5px;
+}
 
+.section-heading {
+    display: grid;
 
-            ${extra}
+    grid-template-columns: 160px 1fr;
 
+    gap: 55px;
 
-            <!-- detalhes tecnológicos -->
+    margin-bottom: 60px;
+}
 
-            <path
-                d="M70 245 H430"
-                stroke="${dino.color}"
-                stroke-width="1"
-                opacity=".15"
-            />
+.section-heading h2 {
+    max-width: 650px;
 
-            <circle
-                cx="70"
-                cy="245"
-                r="3"
-                fill="${dino.color}"
-                opacity=".5"
-            />
+    font-size: clamp(42px, 6vw, 70px);
 
-        </svg>
+    line-height: 1.02;
 
-    `;
+    margin-bottom: 20px;
+}
 
+.section-heading p {
+    max-width: 580px;
+
+    font-size: 14px;
+
+    color: var(--text-soft);
 }
 
 
@@ -577,1303 +389,1737 @@ function dinosaurSVG(dino, large = false) {
    HERO
 ========================================================= */
 
-function renderHero() {
+.hero {
+    position: relative;
 
-    const trex =
-        dinosaurs.find(
-            dino => dino.id === "trex"
+    min-height: calc(100vh - 82px);
+
+    max-width: var(--max-width);
+
+    margin: 0 auto;
+
+    padding: 90px 22px 100px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 0.8fr;
+
+    align-items: center;
+
+    gap: 50px;
+
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+
+    z-index: 2;
+}
+
+.hero-tag {
+    display: inline-block;
+
+    margin-bottom: 27px;
+
+    color: var(--green);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+}
+
+.hero h1 {
+    max-width: 650px;
+
+    font-size: clamp(55px, 7vw, 92px);
+
+    line-height: 0.98;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 30px;
+}
+
+.hero-description {
+    max-width: 520px;
+
+    font-size: 15px;
+
+    color: var(--text-soft);
+
+    margin-bottom: 34px;
+}
+
+
+/* botões */
+
+.hero-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+.button {
+    min-height: 46px;
+
+    padding: 0 20px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 18px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+
+    text-transform: uppercase;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        color 0.25s ease;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+}
+
+.button-primary {
+    background: var(--green);
+
+    color: #091108;
+}
+
+.button-primary:hover {
+    background: var(--green-light);
+}
+
+.button-secondary {
+    border: 1px solid var(--border);
+
+    color: var(--text-soft);
+}
+
+.button-secondary:hover {
+    border-color: var(--green);
+
+    color: var(--green);
+}
+
+
+/* estatísticas */
+
+.hero-stats {
+    display: flex;
+
+    gap: 45px;
+
+    margin-top: 65px;
+}
+
+.stat {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.stat strong {
+    font-family: var(--serif);
+
+    color: var(--text);
+
+    font-size: 28px;
+
+    font-weight: 500;
+}
+
+.stat span {
+    color: #707b6d;
+
+    font-size: 7px;
+
+    letter-spacing: 2px;
+}
+
+
+/* visual */
+
+.hero-visual {
+    position: relative;
+
+    height: 500px;
+
+    display: grid;
+
+    place-items: center;
+}
+
+.hero-dino-image {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(180, 205, 90, 0.14);
+
+    background: #08140c;
+
+    box-shadow:
+        0 0 80px rgba(100, 130, 50, 0.08),
+        inset 0 0 70px rgba(0, 0, 0, 0.45);
+
+    transform: rotate(-2deg);
+}
+
+.hero-dino-image img {
+    width: 100%;
+
+    height: 350px;
+
+    display: block;
+
+    object-fit: cover;
+
+    filter:
+        brightness(0.76)
+        saturate(0.82)
+        contrast(1.12);
+
+    transition: transform 0.6s ease;
+}
+
+.hero-dino-image:hover img {
+    transform: scale(1.05);
+}
+
+
+/* órbitas */
+
+.hero-orbit {
+    position: absolute;
+
+    border: 1px solid rgba(150, 180, 90, 0.11);
+
+    border-radius: 50%;
+}
+
+.orbit-one {
+    width: 430px;
+    height: 250px;
+
+    transform: rotate(-24deg);
+}
+
+.orbit-two {
+    width: 520px;
+    height: 310px;
+
+    transform: rotate(28deg);
+}
+
+
+/* informações */
+
+.hero-data {
+    position: absolute;
+
+    z-index: 3;
+
+    padding: 12px 16px;
+
+    border: 1px solid rgba(180, 205, 90, 0.18);
+
+    background: rgba(7, 17, 12, 0.86);
+
+    backdrop-filter: blur(10px);
+}
+
+.hero-data span {
+    display: block;
+
+    color: #78836e;
+
+    font-size: 6px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 4px;
+}
+
+.hero-data strong {
+    color: var(--green);
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+}
+
+.data-one {
+    top: 75px;
+
+    left: -15px;
+}
+
+.data-two {
+    right: -15px;
+
+    bottom: 90px;
+}
+
+
+/* scroll */
+
+.scroll-indicator {
+    position: absolute;
+
+    bottom: 22px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    color: #626d5e;
+
+    font-size: 7px;
+
+    letter-spacing: 2.5px;
+}
+
+.scroll-indicator div {
+    width: 45px;
+
+    height: 1px;
+
+    background: #4a5845;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.intro {
+    border-top: 1px solid var(--border);
+
+    border-bottom: 1px solid var(--border);
+}
+
+.intro-grid {
+    display: grid;
+
+    grid-template-columns: 1.2fr 0.8fr;
+
+    gap: 100px;
+
+    margin-top: 35px;
+}
+
+.intro-grid h2 {
+    font-size: clamp(48px, 6vw, 75px);
+
+    line-height: 1.03;
+
+    letter-spacing: -1px;
+}
+
+.intro-text {
+    padding-top: 10px;
+}
+
+.intro-text p {
+    font-size: 14px;
+
+    margin-bottom: 22px;
+}
+
+.text-link {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 18px;
+
+    color: var(--green);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.text-link span {
+    transition: transform 0.2s ease;
+}
+
+.text-link:hover span {
+    transform: translate(4px, -4px);
+}
+
+
+/* =========================================================
+   PESQUISA
+========================================================= */
+
+.search-area {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 35px;
+}
+
+.search-box {
+    flex: 1;
+
+    max-width: 570px;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 0 14px;
+
+    border: 1px solid var(--border);
+
+    background: rgba(7, 17, 12, 0.65);
+
+    transition: border 0.25s ease;
+}
+
+.search-box:focus-within {
+    border-color: rgba(183, 207, 82, 0.55);
+}
+
+.search-icon {
+    color: var(--green);
+
+    font-size: 20px;
+}
+
+.search-box input {
+    width: 100%;
+
+    border: 0;
+
+    outline: 0;
+
+    background: transparent;
+
+    color: var(--text);
+
+    font-family: var(--sans);
+
+    font-size: 13px;
+}
+
+.search-box input::placeholder {
+    color: #707b6d;
+}
+
+.search-box kbd {
+    color: #6b7668;
+
+    border: 1px solid var(--border);
+
+    padding: 3px 7px;
+
+    font-size: 9px;
+}
+
+
+/* filtros */
+
+.filter-buttons {
+    display: flex;
+
+    gap: 6px;
+}
+
+.filter-button {
+    height: 36px;
+
+    padding: 0 13px;
+
+    border: 1px solid var(--border);
+
+    background: transparent;
+
+    color: #8c9687;
+
+    cursor: pointer;
+
+    font-family: var(--sans);
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border 0.2s ease;
+}
+
+.filter-button:hover,
+.filter-button.active {
+    background: rgba(183, 207, 82, 0.10);
+
+    border-color: rgba(183, 207, 82, 0.45);
+
+    color: var(--green);
+}
+
+
+/* resultado */
+
+.search-result {
+    min-height: 20px;
+
+    margin-bottom: 15px;
+
+    color: #7f8a79;
+
+    font-size: 10px;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.dinosaur-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 16px;
+}
+
+.dino-card {
+    position: relative;
+
+    overflow: hidden;
+
+    border: 1px solid var(--border);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(20, 40, 25, 0.75),
+            rgba(6, 17, 11, 0.94)
         );
 
-    if (heroArt && trex) {
+    transition:
+        transform 0.3s ease,
+        border 0.3s ease,
+        box-shadow 0.3s ease;
+}
 
-        heroArt.innerHTML =
-            dinosaurSVG(trex, true);
+.dino-card:hover {
+    transform: translateY(-5px);
 
-    }
+    border-color: rgba(183, 207, 82, 0.42);
 
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.22),
+        0 0 30px rgba(120, 150, 50, 0.05);
 }
 
 
-/* =========================================================
-   RENDERIZAR CARDS
-========================================================= */
+/* imagem */
 
-function renderDinosaurs(list) {
+.card-image {
+    position: relative;
 
-    if (!grid) return;
+    height: 220px;
 
+    overflow: hidden;
 
-    grid.innerHTML = "";
+    background:
+        radial-gradient(
+            circle,
+            rgba(75, 100, 55, 0.2),
+            transparent 60%
+        ),
+        #08140d;
+}
 
+.card-image::after {
+    content: "";
 
-    if (!list.length) {
+    position: absolute;
 
-        grid.innerHTML = `
+    inset: 0;
 
-            <div class="empty-state">
-
-                <div class="empty-icon">
-                    🦕
-                </div>
-
-                <h3>
-                    Nenhum dinossauro encontrado
-                </h3>
-
-                <p>
-                    Tente pesquisar por outro nome ou período.
-                </p>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    list.forEach((dino, index) => {
-
-        const card =
-            document.createElement("article");
-
-
-        card.className =
-            "dino-card";
-
-
-        card.style.animationDelay =
-            `${index * 60}ms`;
-
-
-        card.innerHTML = `
-
-            <div class="dino-art">
-
-                ${dinosaurSVG(dino)}
-
-            </div>
-
-
-            <div class="dino-card-body">
-
-                <div class="dino-period">
-                    ${dino.period}
-                </div>
-
-
-                <h3>
-                    ${dino.shortName}
-                </h3>
-
-
-                <div class="dino-scientific">
-                    ${dino.name}
-                </div>
-
-
-                <div class="dino-bottom">
-
-                    <span>
-                        ${dino.typeLabel}
-                    </span>
-
-                    <div class="dino-arrow">
-                        →
-                    </div>
-
-                </div>
-
-            </div>
-
-        `;
-
-
-        card.addEventListener(
-            "click",
-            () => openDino(dino)
+    background:
+        linear-gradient(
+            180deg,
+            transparent 55%,
+            rgba(5, 13, 8, 0.55)
         );
 
+    pointer-events: none;
+}
 
-        grid.appendChild(card);
+.card-image img {
+    width: 100%;
 
-    });
+    height: 100%;
 
+    object-fit: cover;
+
+    display: block;
+
+    filter:
+        brightness(0.78)
+        saturate(0.85)
+        contrast(1.08);
+
+    transition:
+        transform 0.6s ease,
+        filter 0.5s ease;
+}
+
+.dino-card:hover .card-image img {
+    transform: scale(1.05);
+
+    filter:
+        brightness(0.92)
+        saturate(0.95)
+        contrast(1.05);
+}
+
+
+/* número */
+
+.card-number {
+    position: absolute;
+
+    z-index: 3;
+
+    top: 14px;
+
+    right: 14px;
+
+    color: rgba(235, 239, 220, 0.6);
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+
+/* conteúdo */
+
+.card-content {
+    padding: 25px 20px 18px;
+}
+
+.card-period {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: var(--green);
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.card-content h3 {
+    font-size: 27px;
+
+    line-height: 1;
+
+    margin-bottom: 5px;
+}
+
+.scientific-name {
+    color: #667163;
+
+    font-family: var(--serif);
+
+    font-size: 11px;
+
+    font-style: italic;
+}
+
+.card-description {
+    margin-top: 17px;
+
+    min-height: 60px;
+
+    color: #aab3a6;
+
+    font-size: 11px;
+
+    line-height: 1.65;
+}
+
+.card-footer {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 20px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid var(--border);
+}
+
+.card-diet {
+    color: #788373;
+
+    font-size: 7px;
+
+    letter-spacing: 1.7px;
+
+    text-transform: uppercase;
+}
+
+.card-button {
+    border: 0;
+
+    background: transparent;
+
+    color: var(--green);
+
+    cursor: pointer;
+
+    font-size: 17px;
+
+    transition: transform 0.2s ease;
+}
+
+.card-button:hover {
+    transform: translateX(5px);
+}
+
+
+/* vazio */
+
+.empty-state {
+    text-align: center;
+
+    padding: 80px 20px;
+}
+
+.empty-state > div {
+    font-size: 45px;
+
+    margin-bottom: 20px;
+}
+
+.empty-state h3 {
+    font-size: 28px;
+
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    color: var(--text-muted);
 }
 
 
 /* =========================================================
-   FILTRO
+   ERAS
 ========================================================= */
 
-function filterDinosaurs() {
-
-    const query =
-        searchInput
-            ? searchInput.value
-                .toLowerCase()
-                .trim()
-            : "";
-
-
-    const filtered =
-        dinosaurs.filter(dino => {
-
-            const matchesFilter =
-                currentFilter === "all" ||
-                dino.type === currentFilter;
-
-
-            const matchesSearch =
-
-                dino.name
-                    .toLowerCase()
-                    .includes(query)
-
-                ||
-
-                dino.shortName
-                    .toLowerCase()
-                    .includes(query)
-
-                ||
-
-                dino.period
-                    .toLowerCase()
-                    .includes(query)
-
-                ||
-
-                dino.location
-                    .toLowerCase()
-                    .includes(query);
-
-
-            return (
-                matchesFilter &&
-                matchesSearch
-            );
-
-        });
-
-
-    renderDinosaurs(filtered);
-
+.eras {
+    border-top: 1px solid var(--border);
 }
 
+.timeline {
+    position: relative;
 
-if (searchInput) {
-
-    searchInput.addEventListener(
-        "input",
-        filterDinosaurs
-    );
-
+    padding-left: 55px;
 }
 
+.timeline::before {
+    content: "";
 
-filters.forEach(filter => {
+    position: absolute;
 
-    filter.addEventListener(
-        "click",
-        () => {
+    top: 0;
+    bottom: 0;
 
-            filters.forEach(
-                item =>
-                    item.classList.remove(
-                        "active"
-                    )
-            );
+    left: 14px;
 
+    width: 1px;
 
-            filter.classList.add(
-                "active"
-            );
+    background:
+        linear-gradient(
+            var(--green),
+            rgba(183, 207, 82, 0.05)
+        );
+}
 
+.era-card {
+    position: relative;
 
-            currentFilter =
-                filter.dataset.filter;
+    display: grid;
 
+    grid-template-columns: 160px 1fr;
 
-            filterDinosaurs();
+    gap: 40px;
 
-        }
-    );
+    padding: 40px 0;
 
-});
+    border-top: 1px solid var(--border);
+}
+
+.era-card:last-child {
+    border-bottom: 1px solid var(--border);
+}
+
+.era-date {
+    color: var(--text);
+
+    font-family: var(--serif);
+
+    font-size: 22px;
+}
+
+.era-date span {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #687466;
+
+    font-family: var(--sans);
+
+    font-size: 7px;
+
+    letter-spacing: 1px;
+}
+
+.era-dot {
+    position: absolute;
+
+    left: -47px;
+
+    top: 45px;
+
+    width: 12px;
+    height: 12px;
+
+    border: 2px solid var(--green);
+
+    border-radius: 50%;
+
+    background: var(--bg);
+
+    box-shadow: 0 0 15px rgba(183, 207, 82, 0.3);
+}
+
+.era-name {
+    color: var(--green);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.era-content h3 {
+    margin: 9px 0 10px;
+
+    font-size: 32px;
+}
+
+.era-content p {
+    max-width: 600px;
+
+    font-size: 13px;
+}
+
+.era-species {
+    display: inline-block;
+
+    margin-top: 15px;
+
+    color: #7e8978;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
 
 
 /* =========================================================
-   MODAL
+   CURIOSIDADES
 ========================================================= */
 
-function openDino(dino) {
+.curiosity-grid {
+    display: grid;
 
-    if (!modal || !modalBody) return;
+    grid-template-columns: repeat(4, 1fr);
 
+    gap: 12px;
+}
 
-    modalBody.innerHTML = `
+.curiosity-card {
+    position: relative;
 
-        <div class="modal-dino">
+    min-height: 300px;
 
-            <div class="modal-image">
+    padding: 25px 20px;
 
-                ${dinosaurSVG(dino, true)}
+    border: 1px solid var(--border);
 
-            </div>
-
-
-            <div class="modal-content">
-
-                <div class="section-label">
-                    PALEONTOLOGICAL DATABASE
-                </div>
-
-
-                <h2>
-                    ${dino.shortName}
-                </h2>
-
-
-                <p class="modal-scientific">
-                    ${dino.name}
-                </p>
-
-
-                <p class="modal-description">
-                    ${dino.description}
-                </p>
-
-
-                <div class="modal-grid">
-
-                    <div>
-
-                        <span>
-                            PERÍODO
-                        </span>
-
-                        <strong>
-                            ${dino.period}
-                        </strong>
-
-                    </div>
-
-
-                    <div>
-
-                        <span>
-                            DIETA
-                        </span>
-
-                        <strong>
-                            ${dino.diet}
-                        </strong>
-
-                    </div>
-
-
-                    <div>
-
-                        <span>
-                            COMPRIMENTO
-                        </span>
-
-                        <strong>
-                            ${dino.length}
-                        </strong>
-
-                    </div>
-
-
-                    <div>
-
-                        <span>
-                            PESO
-                        </span>
-
-                        <strong>
-                            ${dino.weight}
-                        </strong>
-
-                    </div>
-
-
-                    <div>
-
-                        <span>
-                            LOCAL
-                        </span>
-
-                        <strong>
-                            ${dino.location}
-                        </strong>
-
-                    </div>
-
-
-                    <div>
-
-                        <span>
-                            ÉPOCA
-                        </span>
-
-                        <strong>
-                            ${dino.years}
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
-                <div class="modal-curiosity">
-
-                    <span>
-                        VOCÊ SABIA?
-                    </span>
-
-                    <p>
-                        ${dino.curiosity}
-                    </p>
-
-                </div>
-
-
-                <button
-                    class="button button-primary"
-                    id="askDinoButton"
-                >
-
-                    PERGUNTAR AO DINO AI
-
-                    <span>
-                        →
-                    </span>
-
-                </button>
-
-            </div>
-
-        </div>
-
-    `;
-
-
-    const askButton =
-        document.getElementById(
-            "askDinoButton"
+    background:
+        linear-gradient(
+            160deg,
+            rgba(20, 40, 24, 0.6),
+            rgba(6, 15, 10, 0.85)
         );
 
-
-    if (askButton) {
-
-        askButton.addEventListener(
-            "click",
-            () => {
-
-                closeDinoModal();
-
-                setTimeout(() => {
-
-                    const ai =
-                        document.getElementById(
-                            "dino-ai"
-                        );
-
-                    if (ai) {
-
-                        ai.scrollIntoView({
-                            behavior: "smooth"
-                        });
-
-                    }
-
-
-                    setTimeout(() => {
-
-                        if (aiInput) {
-
-                            aiInput.focus();
-
-                            aiInput.value =
-                                `Conte-me mais sobre o ${dino.shortName}.`;
-
-                        }
-
-                    }, 500);
-
-                }, 200);
-
-            }
-        );
-
-    }
-
-
-    modal.classList.add("show");
-
-    document.body.style.overflow =
-        "hidden";
-
+    transition:
+        transform 0.25s ease,
+        border 0.25s ease;
 }
 
+.curiosity-card:hover {
+    transform: translateY(-4px);
 
-function closeDinoModal() {
-
-    if (!modal) return;
-
-    modal.classList.remove("show");
-
-    document.body.style.overflow = "";
-
+    border-color: rgba(183, 207, 82, 0.35);
 }
 
+.curiosity-number {
+    color: #5e6a59;
 
-if (closeModalButton) {
+    font-size: 8px;
 
-    closeModalButton.addEventListener(
-        "click",
-        closeDinoModal
-    );
-
+    letter-spacing: 2px;
 }
 
+.curiosity-icon {
+    margin: 35px 0 22px;
 
-if (modal) {
-
-    modal.addEventListener(
-        "click",
-        event => {
-
-            if (
-                event.target === modal
-            ) {
-
-                closeDinoModal();
-
-            }
-
-        }
-    );
-
+    font-size: 30px;
 }
 
+.curiosity-card h3 {
+    margin-bottom: 12px;
 
-document.addEventListener(
-    "keydown",
-    event => {
+    font-size: 23px;
 
-        if (
-            event.key === "Escape"
-        ) {
-
-            closeDinoModal();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   MENU MOBILE
-========================================================= */
-
-if (mobileMenu) {
-
-    mobileMenu.addEventListener(
-        "click",
-        () => {
-
-            navigation.classList.toggle(
-                "open"
-            );
-
-        }
-    );
-
+    line-height: 1.1;
 }
 
+.curiosity-card p {
+    color: #9fa99b;
 
-document
-    .querySelectorAll(".nav-link")
-    .forEach(link => {
+    font-size: 11px;
 
-        link.addEventListener(
-            "click",
-            () => {
-
-                navigation.classList.remove(
-                    "open"
-                );
-
-            }
-        );
-
-    });
-
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-window.addEventListener(
-    "scroll",
-    () => {
-
-        if (!header) return;
-
-
-        if (window.scrollY > 50) {
-
-            header.classList.add(
-                "scrolled"
-            );
-
-        } else {
-
-            header.classList.remove(
-                "scrolled"
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   NAVEGAÇÃO ATIVA
-========================================================= */
-
-const sections =
-    document.querySelectorAll(
-        "main section[id]"
-    );
-
-
-const navLinks =
-    document.querySelectorAll(
-        ".nav-link"
-    );
-
-
-const navObserver =
-    new IntersectionObserver(
-        entries => {
-
-            entries.forEach(
-                entry => {
-
-                    if (
-                        entry.isIntersecting
-                    ) {
-
-                        navLinks.forEach(
-                            link =>
-                                link.classList.remove(
-                                    "active"
-                                )
-                        );
-
-
-                        const active =
-                            document.querySelector(
-                                `.nav-link[href="#${entry.target.id}"]`
-                            );
-
-
-                        if (active) {
-
-                            active.classList.add(
-                                "active"
-                            );
-
-                        }
-
-                    }
-
-                }
-            );
-
-        },
-        {
-            threshold: .35
-        }
-    );
-
-
-sections.forEach(
-    section =>
-        navObserver.observe(section)
-);
-
-
-/* =========================================================
-   ANIMAÇÃO DA TIMELINE
-========================================================= */
-
-const animatedElements =
-    document.querySelectorAll(
-        ".era"
-    );
-
-
-const animationObserver =
-    new IntersectionObserver(
-        entries => {
-
-            entries.forEach(
-                entry => {
-
-                    if (
-                        entry.isIntersecting
-                    ) {
-
-                        entry.target.classList.add(
-                            "visible"
-                        );
-
-                        animationObserver.unobserve(
-                            entry.target
-                        );
-
-                    }
-
-                }
-            );
-
-        },
-        {
-            threshold: .15
-        }
-    );
-
-
-animatedElements.forEach(
-    element =>
-        animationObserver.observe(element)
-);
+    line-height: 1.7;
+}
 
 
 /* =========================================================
    DINO AI
 ========================================================= */
 
-function normalizeText(text) {
+.ai-section {
+    border-top: 1px solid var(--border);
+}
 
-    return text
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(
-            /[\u0300-\u036f]/g,
-            ""
-        );
+.ai-panel {
+    display: grid;
 
+    grid-template-columns: 0.8fr 1.2fr;
+
+    gap: 70px;
+
+    padding: 60px;
+
+    border: 1px solid rgba(183, 207, 82, 0.20);
+
+    background:
+        radial-gradient(
+            circle at 90% 10%,
+            rgba(125, 155, 55, 0.13),
+            transparent 35%
+        ),
+        #09150d;
+}
+
+.ai-badge {
+    color: var(--green);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 2.5px;
+
+    margin-bottom: 25px;
+}
+
+.ai-intro h2 {
+    font-size: clamp(45px, 5vw, 68px);
+
+    line-height: 1;
+}
+
+.ai-intro p {
+    margin-top: 25px;
+
+    max-width: 350px;
+
+    font-size: 13px;
 }
 
 
-function getAIResponse(question) {
+/* chat */
 
-    const text =
-        normalizeText(question);
+.ai-chat {
+    overflow: hidden;
 
+    border: 1px solid var(--border);
 
-    let dino = null;
+    background: #06100a;
+}
 
+.ai-chat-header {
+    padding: 15px 18px;
 
-    for (const item of dinosaurs) {
+    border-bottom: 1px solid var(--border);
+}
 
-        const name =
-            normalizeText(
-                item.name
-            );
+.ai-status {
+    display: flex;
 
+    align-items: center;
 
-        const shortName =
-            normalizeText(
-                item.shortName
-            );
+    gap: 8px;
 
+    color: var(--text);
 
-        if (
-            text.includes(name) ||
-            text.includes(shortName)
-        ) {
+    font-size: 9px;
 
-            dino = item;
+    font-weight: 700;
 
-            break;
+    letter-spacing: 1.5px;
 
-        }
+    text-transform: uppercase;
+}
 
-    }
+.status-dot {
+    width: 7px;
+    height: 7px;
 
+    border-radius: 50%;
 
-    /* ===========================
-       DINOSSAURO ESPECÍFICO
-    =========================== */
+    background: var(--green);
 
-    if (dino) {
+    box-shadow: 0 0 12px var(--green);
+}
 
-        if (
-            text.includes("tamanho") ||
-            text.includes("comprimento") ||
-            text.includes("metros")
-        ) {
+.ai-status small {
+    margin-left: auto;
 
-            return `
-                O <strong>${dino.shortName}</strong>
-                tinha aproximadamente
-                <strong>${dino.length}</strong>.
-            `;
+    color: var(--green);
 
-        }
+    font-size: 6px;
+}
 
 
-        if (
-            text.includes("peso") ||
-            text.includes("pesava")
-        ) {
+/* mensagens */
 
-            return `
-                O <strong>${dino.shortName}</strong>
-                podia pesar cerca de
-                <strong>${dino.weight}</strong>.
-            `;
+.chat-messages {
+    min-height: 280px;
 
-        }
+    max-height: 380px;
 
+    overflow-y: auto;
 
-        if (
-            text.includes("comia") ||
-            text.includes("aliment") ||
-            text.includes("dieta")
-        ) {
+    padding: 20px;
+}
 
-            return `
-                A dieta do
-                <strong>${dino.shortName}</strong>
-                era classificada como
-                <strong>${dino.diet.toLowerCase()}</strong>.
-            `;
+.chat-message {
+    display: flex;
 
-        }
+    gap: 12px;
 
+    margin-bottom: 20px;
+}
 
-        if (
-            text.includes("onde") ||
-            text.includes("viveu") ||
-            text.includes("local")
-        ) {
+.message-avatar {
+    flex-shrink: 0;
 
-            return `
-                Fósseis do
-                <strong>${dino.shortName}</strong>
-                são associados principalmente a
-                <strong>${dino.location}</strong>.
-            `;
+    width: 30px;
+    height: 30px;
 
-        }
+    display: grid;
 
+    place-items: center;
 
-        if (
-            text.includes("quando") ||
-            text.includes("periodo") ||
-            text.includes("epoca")
-        ) {
+    border: 1px solid rgba(183, 207, 82, 0.25);
 
-            return `
-                O
-                <strong>${dino.shortName}</strong>
-                viveu durante o
-                <strong>${dino.period}</strong>,
-                aproximadamente
-                <strong>${dino.years}</strong>.
-            `;
+    color: var(--green);
 
-        }
+    font-size: 9px;
+}
 
+.message-content {
+    max-width: 80%;
+}
 
-        if (
-            text.includes("veloc") ||
-            text.includes("corria")
-        ) {
+.message-name {
+    display: block;
 
-            return `
-                As estimativas de velocidade para
-                <strong>${dino.shortName}</strong>
-                são incertas. A base desta enciclopédia
-                não possui uma estimativa confiável para
-                informar uma velocidade específica.
-            `;
+    margin-bottom: 6px;
 
-        }
+    color: var(--green);
 
+    font-size: 7px;
 
-        return `
+    font-weight: 700;
 
-            <strong>
-                ${dino.shortName}
-            </strong>
+    letter-spacing: 1.5px;
+}
 
-            foi um
-            ${dino.typeLabel.toLowerCase()}
-            do
-            <strong>
-                ${dino.period}
-            </strong>.
+.message-content p {
+    padding: 12px 14px;
 
-            <br><br>
+    border: 1px solid var(--border);
 
-            ${dino.description}
+    background: rgba(15, 31, 19, 0.65);
 
-            <br><br>
+    color: #cbd2c6;
 
-            <strong>
-                Curiosidade:
-            </strong>
+    font-size: 11px;
 
-            ${dino.curiosity}
+    line-height: 1.65;
+}
 
-        `;
+.user-message {
+    justify-content: flex-end;
+}
 
-    }
+.user-message .message-content p {
+    background: rgba(183, 207, 82, 0.08);
 
+    border-color: rgba(183, 207, 82, 0.2);
+}
 
-    /* ===========================
-       PERGUNTAS GERAIS
-    =========================== */
 
-    if (
-        text.includes("maior") ||
-        text.includes("gigante")
-    ) {
+/* perguntas rápidas */
 
-        return `
+.quick-questions {
+    display: flex;
 
-            Entre os animais desta enciclopédia,
-            o <strong>Brachiosaurus</strong> está entre
-            os maiores, podendo alcançar cerca de
-            <strong>26 metros</strong> de comprimento.
+    gap: 6px;
 
-        `;
+    padding: 0 15px 12px;
 
-    }
+    overflow-x: auto;
+}
 
+.quick-questions button {
+    flex-shrink: 0;
 
-    if (
-        text.includes("pena") ||
-        text.includes("penas")
-    ) {
+    padding: 7px 10px;
 
-        return `
+    border: 1px solid var(--border);
 
-            Sim. Diversos dinossauros possuíam
-            penas ou estruturas semelhantes.
+    background: transparent;
 
-            As aves modernas são consideradas
-            dinossauros terópodes sobreviventes.
+    color: #899486;
 
-        `;
+    cursor: pointer;
 
-    }
+    font-family: var(--sans);
 
+    font-size: 7px;
 
-    if (
-        text.includes("ovo") ||
-        text.includes("ovos")
-    ) {
+    transition:
+        color 0.2s ease,
+        border 0.2s ease;
+}
 
-        return `
+.quick-questions button:hover {
+    color: var(--green);
 
-            Sim. Dinossauros colocavam ovos.
+    border-color: rgba(183, 207, 82, 0.4);
+}
 
-            Fósseis de ninhos, ovos e embriões
-            ajudaram os pesquisadores a entender
-            como algumas espécies se reproduziam.
 
-        `;
+/* formulário */
 
-    }
+.chat-form {
+    display: flex;
 
+    border-top: 1px solid var(--border);
+}
 
-    if (
-        text.includes("extinc") ||
-        text.includes("asteroide") ||
-        text.includes("meteoro")
-    ) {
+.chat-form input {
+    flex: 1;
 
-        return `
+    min-width: 0;
 
-            A extinção dos dinossauros não avianos
-            aconteceu há aproximadamente
-            <strong>66 milhões de anos</strong>.
+    height: 50px;
 
-            O impacto de um grande asteroide na região
-            da atual Península de Yucatán é considerado
-            o principal fator do evento, juntamente
-            com mudanças ambientais.
+    padding: 0 15px;
 
-        `;
+    border: 0;
 
-    }
+    outline: 0;
 
+    background: #07120b;
 
-    if (
-        text.includes("quando surgiram") ||
-        text.includes("surgiram")
-    ) {
+    color: var(--text);
 
-        return `
+    font-family: var(--sans);
 
-            Os primeiros dinossauros conhecidos
-            surgiram durante o
-            <strong>Triássico</strong>,
-            há mais de 230 milhões de anos.
+    font-size: 11px;
+}
 
-        `;
+.chat-form input::placeholder {
+    color: #657060;
+}
 
-    }
+.chat-form button {
+    width: 55px;
 
+    border: 0;
 
-    if (
-        text.includes("oi") ||
-        text.includes("ola") ||
-        text.includes("ajuda")
-    ) {
+    border-left: 1px solid var(--border);
 
-        return `
+    background: var(--green);
 
-            Olá! 🦖
+    color: #07100a;
 
-            Eu sou o Dino AI.
+    cursor: pointer;
 
-            Você pode perguntar:
+    font-size: 18px;
 
-            <br><br>
+    transition: background 0.2s ease;
+}
 
-            • Qual era o tamanho do T. rex?<br>
-            • O Velociraptor tinha penas?<br>
-            • O que o Triceratops comia?<br>
-            • Onde viveu o Spinosaurus?<br>
-            • Quando os dinossauros surgiram?<br>
-            • Como os dinossauros foram extintos?
-
-        `;
-
-    }
-
-
-    return `
-
-        Ainda não encontrei uma resposta específica
-        para essa pergunta na minha base.
-
-        <br><br>
-
-        Tente mencionar o nome de um dinossauro
-        disponível na enciclopédia.
-
-        <br><br>
-
-        Por exemplo:
-
-        <strong>
-            "Qual era o tamanho do T. rex?"
-        </strong>
-
-    `;
-
+.chat-form button:hover {
+    background: var(--green-light);
 }
 
 
 /* =========================================================
-   CHAT
+   MODAL
 ========================================================= */
 
-function addUserMessage(text) {
+.modal {
+    position: fixed;
 
-    const message =
-        document.createElement("div");
+    inset: 0;
 
+    z-index: 500;
 
-    message.className =
-        "message user";
+    display: none;
 
+    place-items: center;
 
-    message.innerHTML = `
+    padding: 20px;
+}
 
-        <div class="message-content">
+.modal.open {
+    display: grid;
+}
 
-            <span>
-                VOCÊ
-            </span>
+.modal-overlay {
+    position: absolute;
 
-            <p>
-                ${escapeHTML(text)}
-            </p>
+    inset: 0;
 
-        </div>
+    background: rgba(2, 8, 4, 0.82);
 
-    `;
+    backdrop-filter: blur(8px);
+}
 
+.modal-box {
+    position: relative;
 
-    chatWindow.appendChild(
-        message
-    );
+    z-index: 2;
 
+    width: min(850px, 100%);
 
-    scrollChat();
+    max-height: 90vh;
 
+    overflow: auto;
+
+    display: grid;
+
+    grid-template-columns: 0.9fr 1.1fr;
+
+    border: 1px solid rgba(183, 207, 82, 0.3);
+
+    background: #09150d;
+
+    box-shadow: 0 30px 100px rgba(0, 0, 0, 0.5);
+}
+
+.modal-close {
+    position: absolute;
+
+    z-index: 5;
+
+    top: 15px;
+
+    right: 15px;
+
+    width: 36px;
+    height: 36px;
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    background: rgba(0,0,0,0.5);
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 22px;
+}
+
+.modal-image {
+    min-height: 430px;
+
+    background: #06100a;
+}
+
+.modal-image img {
+    width: 100%;
+    height: 100%;
+
+    min-height: 430px;
+
+    object-fit: cover;
+
+    display: block;
+
+    filter:
+        brightness(0.85)
+        saturate(0.9)
+        contrast(1.08);
+}
+
+.modal-content {
+    padding: 50px 40px;
+}
+
+.modal-period {
+    color: var(--green);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.modal-content h2 {
+    margin-top: 10px;
+
+    font-size: 52px;
+
+    line-height: 1;
+}
+
+.modal-scientific {
+    margin-top: 8px;
+
+    color: #6f7a6b;
+
+    font-family: var(--serif);
+
+    font-size: 14px;
+
+    font-style: italic;
+}
+
+.modal-description {
+    margin-top: 25px;
+
+    color: #c2cabc;
+
+    font-size: 13px;
+}
+
+.modal-facts {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 8px;
+
+    margin-top: 25px;
+}
+
+.modal-fact {
+    padding: 13px;
+
+    border: 1px solid var(--border);
+
+    background: rgba(20, 40, 25, 0.35);
+}
+
+.modal-fact span {
+    display: block;
+
+    color: #6e7a69;
+
+    font-size: 7px;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 5px;
+}
+
+.modal-fact strong {
+    color: var(--text);
+
+    font-size: 11px;
 }
 
 
-function addAIMessage(text) {
+/* =========================================================
+   FOOTER
+========================================================= */
 
-    const message =
-        document.createElement("div");
+.site-footer {
+    max-width: var(--max-width);
 
+    margin: auto;
 
-    message.className =
-        "message ai";
+    padding: 50px 22px;
 
+    border-top: 1px solid var(--border);
 
-    message.innerHTML = `
+    display: flex;
 
-        <div class="message-avatar">
-            🦖
-        </div>
+    align-items: center;
 
+    justify-content: space-between;
 
-        <div class="message-content">
+    gap: 20px;
+}
 
-            <span>
-                DINO AI
-            </span>
+.footer-brand {
+    display: flex;
 
-            <p>
-                ${text}
-            </p>
+    flex-direction: column;
 
-        </div>
+    gap: 4px;
+}
 
-    `;
+.footer-brand strong {
+    color: var(--text);
 
+    font-size: 12px;
 
-    chatWindow.appendChild(
-        message
-    );
+    letter-spacing: 1px;
+}
 
+.footer-brand span {
+    color: #596455;
 
-    scrollChat();
+    font-size: 6px;
 
+    letter-spacing: 2px;
+}
+
+.site-footer p {
+    color: #697466;
+
+    font-size: 10px;
+}
+
+.footer-line {
+    color: #596455;
+
+    font-size: 8px;
 }
 
 
-function scrollChat() {
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
 
-    if (!chatWindow) return;
+@media (max-width: 900px) {
 
+    .hero {
+        grid-template-columns: 1fr;
 
-    chatWindow.scrollTo({
-
-        top:
-            chatWindow.scrollHeight,
-
-        behavior:
-            "smooth"
-
-    });
-
-}
-
-
-function sendQuestion(question) {
-
-    if (
-        !question ||
-        !question.trim()
-    ) {
-
-        return;
-
+        padding-top: 70px;
     }
 
-
-    addUserMessage(question);
-
-
-    const loading =
-        document.createElement("div");
-
-
-    loading.className =
-        "message ai";
-
-
-    loading.innerHTML = `
-
-        <div class="message-avatar">
-            🦖
-        </div>
-
-
-        <div class="message-content">
-
-            <span>
-                DINO AI
-            </span>
-
-            <p>
-                Analisando os fósseis...
-            </p>
-
-        </div>
-
-    `;
-
-
-    chatWindow.appendChild(
-        loading
-    );
-
-
-    scrollChat();
-
-
-    setTimeout(() => {
-
-        loading.remove();
-
-
-        const response =
-            getAIResponse(question);
-
-
-        addAIMessage(response);
-
-    }, 650);
-
-}
-
-
-/* =========================================================
-   FORM AI
-========================================================= */
-
-if (aiForm) {
-
-    aiForm.addEventListener(
-        "submit",
-        event => {
-
-            event.preventDefault();
-
-
-            const question =
-                aiInput.value.trim();
-
-
-            if (!question) return;
-
-
-            sendQuestion(question);
-
-
-            aiInput.value = "";
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   SUGESTÕES
-========================================================= */
-
-document
-    .querySelectorAll(".suggestion")
-    .forEach(button => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                const question =
-                    button.dataset.question;
-
-
-                sendQuestion(
-                    question
-                );
-
-            }
-        );
-
-    });
-
-
-/* =========================================================
-   CTRL + K
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-        if (
-            (event.ctrlKey ||
-                event.metaKey) &&
-            event.key.toLowerCase() === "k"
-        ) {
-
-            event.preventDefault();
-
-
-            if (searchInput) {
-
-                searchInput.focus();
-
-            }
-
-        }
-
+    .hero-visual {
+        height: 400px;
     }
-);
 
+    .intro-grid {
+        grid-template-columns: 1fr;
 
-/* =========================================================
-   SEGURANÇA
-========================================================= */
+        gap: 40px;
+    }
 
-function escapeHTML(text) {
+    .dinosaur-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-    const element =
-        document.createElement("div");
+    .curiosity-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-    element.textContent =
-        text;
+    .ai-panel {
+        grid-template-columns: 1fr;
 
-    return element.innerHTML;
+        gap: 45px;
 
+        padding: 40px;
+    }
+
+    .modal-box {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-image {
+        min-height: 260px;
+    }
+
+    .modal-image img {
+        min-height: 260px;
+
+        max-height: 330px;
+    }
 }
 
 
-/* =========================================================
-   INICIALIZAÇÃO
-========================================================= */
+@media (max-width: 700px) {
 
-renderHero();
+    .site-header {
+        height: 70px;
+    }
 
-renderDinosaurs(
-    dinosaurs
-);
+    .main-nav {
+        position: absolute;
+
+        top: 70px;
+
+        left: 0;
+        right: 0;
+
+        display: none;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 0;
+
+        padding: 10px 22px 20px;
+
+        border-bottom: 1px solid var(--border);
+
+        background: rgba(5, 15, 9, 0.97);
+
+        backdrop-filter: blur(20px);
+    }
+
+    .main-nav.open {
+        display: flex;
+    }
+
+    .nav-link {
+        padding: 14px 0;
+
+        font-size: 9px;
+    }
+
+    .nav-link.active::after {
+        display: none;
+    }
+
+    .mobile-menu-button {
+        display: block;
+    }
+
+    .hero {
+        min-height: auto;
+
+        padding-top: 70px;
+    }
+
+    .hero h1 {
+        font-size: clamp(48px, 15vw, 72px);
+    }
+
+    .hero-stats {
+        gap: 25px;
+
+        margin-top: 45px;
+    }
+
+    .hero-visual {
+        height: 330px;
+    }
+
+    .hero-dino-image img {
+        height: 260px;
+    }
+
+    .hero-orbit {
+        display: none;
+    }
+
+    .data-one {
+        left: 0;
+    }
+
+    .data-two {
+        right: 0;
+    }
+
+    .section {
+        padding: 80px 18px;
+    }
+
+    .section-heading {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+
+        margin-bottom: 40px;
+    }
+
+    .section-heading h2 {
+        font-size: 47px;
+    }
+
+    .search-area {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .search-box {
+        max-width: none;
+    }
+
+    .filter-buttons {
+        overflow-x: auto;
+    }
+
+    .dinosaur-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card-image {
+        height: 250px;
+    }
+
+    .timeline {
+        padding-left: 35px;
+    }
+
+    .era-card {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+    .era-dot {
+        left: -28px;
+    }
+
+    .curiosity-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ai-panel {
+        padding: 25px 18px;
+    }
+
+    .site-footer {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .modal-content {
+        padding: 35px 22px;
+    }
+
+    .modal-content h2 {
+        font-size: 42px;
+    }
+
+    .modal-facts {
+        grid-template-columns: 1fr;
+    }
+}
 
 
-console.log(
-    "🦖 DinoWorld iniciado com sucesso."
-);
+@media (max-width: 400px) {
+
+    .hero-stats {
+        flex-wrap: wrap;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .button {
+        width: 100%;
+    }
+
+}
